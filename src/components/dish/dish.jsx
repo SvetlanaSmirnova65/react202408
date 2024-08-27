@@ -1,6 +1,6 @@
 import { Counter } from "../counter/counter";
 
-export const Dish = ({id, name, price }) => {
+export const Dish = ({name, price }) => {
     return (
         <>
             {name} / {price} $

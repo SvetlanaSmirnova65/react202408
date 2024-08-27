@@ -1,7 +1,7 @@
 import { Dish } from "../dish/dish";
 
-export const DishListItem = ({id, name, price }) => {
+export const DishListItem = ({name, price }) => {
     return (
-        <li><Dish /></li>
+        <li><Dish name={name} price={price}/></li>
     );
   };
