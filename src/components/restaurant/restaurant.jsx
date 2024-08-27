@@ -11,13 +11,9 @@ export const Restaurant = ({ name, menu, reviews }) => {
     <section>
       <h2>{name}</h2>
       <h3>Меню</h3>
-      <ul>
-        {menu.length ? <Menu menu={menu} /> : <div>Нет меню</div>}  
-      </ul>
+      {menu.length ? <Menu menu={menu} /> : <div>Нет меню</div>}  
       <h3>Отзывы</h3>
-      <ul>
-        {reviews.length ? <Reviews reviews={reviews} /> : <div>Нет отзывов</div>}
-      </ul>
+      {reviews.length ? <Reviews reviews={reviews} /> : <div>Нет отзывов</div>}
     </section>
   );
 };
