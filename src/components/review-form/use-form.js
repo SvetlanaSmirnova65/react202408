@@ -1,9 +1,9 @@
 import {useReducer} from "react";
 
 const DEFAULT_FROM_VALUE = {
-    name: '',
-    text: '',
-    rating: 1
+    name: "",
+    text: "",
+    rating: 5
 }
 
 const reducer = (state, {type, payload}) => {

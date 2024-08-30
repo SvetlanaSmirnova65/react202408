@@ -1,5 +1,5 @@
 import {useForm} from "./use-form";
-import { RestaurantCounter } from "../restaurant-counter/restaurant-counter";
+import { Counter } from "../counter/counter";
 
 export const ReviewForm = () => {
     const {form, setName, setText, setIncrementRating, setDecrementRating, clearForm} = useForm();
@@ -28,7 +28,7 @@ export const ReviewForm = () => {
             </div>
             <div>
                 <span>Рейтинг</span>
-                <RestaurantCounter 
+                <Counter 
                     value={rating}
                     increment={setIncrementRating}
                     decrement={setDecrementRating}
