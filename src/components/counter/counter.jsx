@@ -1,7 +1,4 @@
-// import { useCount } from "./use-counter";
-
 export const Counter = ({value, increment, decrement}) => {
-  // const { value, increment, decrement } = useCount();
 
   return (
     <div>
