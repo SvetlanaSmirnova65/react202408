@@ -1,13 +1,16 @@
 import {useForm} from "./use-form";
 import { Counter } from "../counter/counter";
 import { Button } from "../button/button";
+import { useAuth } from "../auth-context/use-auth";
 
 import styles from "./review-form.module.css";
 
 export const ReviewForm = () => {
     const {form, setName, setText, setIncrementRating, setDecrementRating, clearForm} = useForm();
     const {name, text, rating} = form;
-
+    const { auth, userLogin } = useAuth();
+    const { isAuthorized, userName } = auth;
+  
     return (
         <div>
             <div>
@@ -34,14 +37,20 @@ export const ReviewForm = () => {
                 />
             </div>
             <div>
-                <span className={styles.label}>Рейтинг</span>
-                <Counter 
-                    value={rating}
-                    increment={setIncrementRating}
-                    decrement={setDecrementRating}
-                    className={styles.button}
-                    viewVariant='default'
-                />
+                {
+                    isAuthorized ? 
+                    <>
+                        <span className={styles.label}>Рейтинг</span>
+                        <Counter 
+                            value={rating}
+                            increment={setIncrementRating}
+                            decrement={setDecrementRating}
+                            className={styles.button}
+                            viewVariant='default'
+                        />
+                    </>
+                    : <></>
+                }
             </div>
         </div>
     )
