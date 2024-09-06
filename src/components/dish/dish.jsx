@@ -8,7 +8,7 @@ export const Dish = ({name, price }) => {
     return (
         <>
             {name} / {price} $
-            {isAuthorized ? <DishCounter /> : ""}
+            {isAuthorized ? <DishCounter /> : null}
         </>
     );
   };

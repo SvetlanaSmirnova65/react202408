@@ -49,7 +49,7 @@ export const ReviewForm = () => {
                             viewVariant='default'
                         />
                     </>
-                    : <></>
+                    : null
                 }
             </div>
         </div>
