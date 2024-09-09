@@ -1,8 +1,16 @@
+import { useSelector } from "react-redux";
+import { useAuth } from "../auth-context/use-auth";
 import { Menu } from "../menu/menu";
-import { ReviewForm } from "../review-form/review-form";
 import { Reviews } from "../reviews/reviews";
+import { selectRestaurantById } from "../../redux/entities/restaurants";
 
-export const Restaurant = ({ name, menu, reviews }) => {
+export const Restaurant = ({ restaurantId }) => {
+  const { auth } = useAuth();
+  const restaurant = useSelector((state) =>
+      selectRestaurantById(state, restaurantId)
+  );
+  const { name, menu: dishesIds, reviews: reviewsIds } = restaurant;
+
   if (!name) {
     return null;
   }
@@ -11,9 +19,9 @@ export const Restaurant = ({ name, menu, reviews }) => {
     <section>
       <h2>{name}</h2>
       <h3>Меню</h3>
-      {menu.length ? <Menu menu={menu} /> : <div>Нет меню</div>}  
+      {dishesIds.length ? <Menu dishesIds={dishesIds} /> : <div>Нет меню</div>}  
       <h3>Отзывы</h3>
-      {reviews.length ? <Reviews reviews={reviews} /> : <div>Нет отзывов</div>}
+      {reviewsIds.length ? <Reviews reviewsIds={reviewsIds} /> : <div>Нет отзывов</div>}
     </section>
   );
 };
