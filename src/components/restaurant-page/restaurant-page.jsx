@@ -1,11 +1,14 @@
 import {useState} from "react";
-import { restaurants } from "../../constants/mock";
 import { Restaurant } from "../restaurant/restaurant";
-import { Tab } from "../tab/tab";
+import { useSelector } from "react-redux";
+import { selectRestaurantsIds } from "../../redux/entities/restaurants";
+import { RestaurantTab } from "../restaurant-tab/restaurant-tab";
 
 export const RestaurantPage = ({ title }) => {
-  const [activeRestaurantId, setActiveRestaurantId] = useState(restaurants[0].id);
-  const activeRestaurant = restaurants.find(({id}) => id === activeRestaurantId);
+  const restaurantsIds = useSelector(selectRestaurantsIds);
+
+  const [activeRestaurantId, setActiveRestaurantId] = useState(restaurantsIds[0]);
+
   const handleSetActiveRestaurantId = (id) => {
     if (activeRestaurantId === id) {
       return;
@@ -17,23 +20,17 @@ export const RestaurantPage = ({ title }) => {
     <div>
       <h1>{title}</h1>
 
-      {restaurants.map(({ name, id }) => (
-        <Tab
+      {restaurantsIds.map((id) => (
+        <RestaurantTab
           key={id}
-          title={name}
+          restaurantId={id}
           onClick={() => handleSetActiveRestaurantId(id)}
           isActive={id === activeRestaurantId}
         />
       ))}
 
-      {activeRestaurant && (
-          <Restaurant
-          name={activeRestaurant.name}
-          menu={activeRestaurant.menu}
-          reviews={activeRestaurant.reviews}
-          />
-        )
-      }
+      {activeRestaurantId && <Restaurant restaurantId={activeRestaurantId} />}
+
     </div>
   );
 };
