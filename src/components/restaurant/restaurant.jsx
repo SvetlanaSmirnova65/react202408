@@ -21,7 +21,7 @@ export const Restaurant = ({ restaurantId }) => {
       <h3>Меню</h3>
       {dishesIds.length ? <Menu dishesIds={dishesIds} /> : <div>Нет меню</div>}  
       <h3>Отзывы</h3>
-      {reviewsIds.length ? <Reviews reviewsIds={reviewsIds} /> : <div>Нет отзывов</div>}
+      {reviewsIds.length ? <Reviews reviewsIds={reviewsIds}/> : <div>Нет отзывов</div>}
     </section>
   );
 };
