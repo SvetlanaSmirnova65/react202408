@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { selectReviewById } from "../../redux/entities/reviews";
 import { ReviewUser } from "../review-user/review-user";
 
+import styles from "./review.module.css";
+
 export const Review = ({ id }) => {
   const review = useSelector((state) => selectReviewById(state, id));
    const { userId, text, rating } = review || {};
@@ -11,6 +13,6 @@ export const Review = ({ id }) => {
    }
 
    return (
-       <><ReviewUser id={userId} text={text}/> <span style={{ color: 'red' }}>{rating}</span></>
+       <><ReviewUser id={userId} text={text}/> <span className={styles.label}>{rating}</span></>
     );
   }; 
