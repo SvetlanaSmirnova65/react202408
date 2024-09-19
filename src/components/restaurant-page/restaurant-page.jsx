@@ -3,17 +3,33 @@ import { Restaurant } from "../restaurant/restaurant";
 import { useSelector } from "react-redux";
 import { selectRestaurantsIds } from "../../redux/entities/restaurants";
 import { RestaurantTab } from "../restaurant-tab/restaurant-tab";
+import { getRestaurants } from "../../redux/entities/restaurants/get-restaurants";
+import { useRequest } from "../../redux/hooks/use-request";
 
 export const RestaurantPage = ({ title }) => {
-  const restaurantsIds = useSelector(selectRestaurantsIds);
+  const requestStatus = useRequest(getRestaurants);
 
-  const [activeRestaurantId, setActiveRestaurantId] = useState(restaurantsIds[0]);
+  const restaurantsIds = useSelector(selectRestaurantsIds);
+  
+
+  const [activeRestaurantId, setActiveRestaurantId] = useState(null);
 
   const handleSetActiveRestaurantId = (id) => {
     if (activeRestaurantId === id) {
       return;
     }
     setActiveRestaurantId(id);
+  }
+  
+  const isLoading = requestStatus === "idle" || requestStatus === "pending";
+  const isError = requestStatus === "rejected";
+
+  if (isLoading) {
+    return "loading...";
+  }
+
+  if (isError) {
+    return "error";
   }
 
   return (

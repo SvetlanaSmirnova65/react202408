@@ -1,19 +1,18 @@
 import { useSelector } from "react-redux";
 import { selectReviewById } from "../../redux/entities/reviews";
-import { selectUserById } from "../../redux/entities/users";
+import { ReviewUser } from "../review-user/review-user";
 
-export const Review = ({id }) => {
-   const review = useSelector((state) => selectReviewById(state, id));
+import styles from "./review.module.css";
+
+export const Review = ({ id }) => {
+  const review = useSelector((state) => selectReviewById(state, id));
    const { userId, text, rating } = review || {};
  
-   const user = useSelector((state) => selectUserById(state, userId));
-   const { name } = user;
-
    if (!text) {
      return null;
    }
 
    return (
-       <>{name}: {text}  <span style={{ color: 'red' }}>{rating}</span></>
+       <><ReviewUser id={userId} text={text}/> <span className={styles.label}>{rating}</span></>
     );
   }; 
