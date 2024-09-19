@@ -15,7 +15,13 @@ export const restaurantsSlice = createSlice({
     builder.addCase(getRestaurants.fulfilled, (state, { payload }) => {
       entityAdapter.setAll(state, payload);
     }),
-});
+    reducers: {
+      addReview: (state, { payload: { restaurantId, reviewId } }) => {
+        state.entities[restaurantId].reviews?.push(reviewId);
+      },
+    },
+  });
 
-export const { selectRestaurantById, selectRestaurantsIds, selectRequestStatus } =
+export const { selectRestaurantById, selectRestaurantsIds } =
   restaurantsSlice.selectors;
+export const { addReview } = restaurantsSlice.actions;

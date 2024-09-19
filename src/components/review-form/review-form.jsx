@@ -5,12 +5,12 @@ import { useAuth } from "../auth-context/use-auth";
 
 import styles from "./review-form.module.css";
 
-export const ReviewForm = () => {
-    const {form, setName, setText, setIncrementRating, setDecrementRating, clearForm} = useForm();
-    const {name, text, rating} = form;
+export const ReviewForm = (onSave) => {
+    const {form, setText, setIncrementRating, setDecrementRating, clearForm} = useForm();
+    const { text, rating} = form;
     const { auth, userLogin } = useAuth();
-    const { isAuthorized, userName } = auth;
-  
+    const { isAuthorized, name, id } = auth;
+    
     return (
         <div>
             <div>
@@ -19,13 +19,8 @@ export const ReviewForm = () => {
                 </Button>
             </div>
             <div>
-                <span className={styles.label}>Имя</span>
-                <input
-                    type='text'
-                    value={name}
-                    onChange={setName}  
-                    className={styles.textbox}                  
-                />
+                <span className={styles.label}>Имя </span>
+                <span>{auth.name}</span>
             </div>
             <div>
                 <span className={styles.label}>Текст</span>
@@ -48,6 +43,15 @@ export const ReviewForm = () => {
                             className={styles.button}
                             viewVariant='default'
                         />
+                        <Button
+                            onClick={() => {
+                                onSave({ text, rating });
+                            }}
+                            className={styles.button}
+                            viewVariant='default'
+                        >
+                            Сохранить
+                        </Button>
                     </>
                     : null
                 }
