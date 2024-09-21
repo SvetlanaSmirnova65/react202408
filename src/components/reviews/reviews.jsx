@@ -6,8 +6,10 @@ import { ReviewForm } from "../review-form/review-form";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { addReviewByRestaurantId } from "../../redux/entities/reviews/add-review-by-restaurant-id";
+import { useAuth } from "../auth-context/use-auth";
   
-  export const Reviews = ({ auth, reviewsIds, restaurantId }) => {
+  export const Reviews = ({ reviewsIds, restaurantId }) => {
+    const { auth } = useAuth();
     const usersRequestStatus = useRequest(getUsers);
     const reviewsRequestStatus = useRequest(
       getReviewsByRestaurantId,
@@ -18,7 +20,7 @@ import { addReviewByRestaurantId } from "../../redux/entities/reviews/add-review
     const dispatch = useDispatch();
     const onSave = useCallback(
       ({ text, rating }) => {
-        const review = { text, rating, user: auth.id };
+        const review = { text, rating, userId: auth.id };
   
         dispatch(addReviewByRestaurantId({ review, restaurantId }));
       },

@@ -5,7 +5,7 @@ import { useAuth } from "../auth-context/use-auth";
 
 import styles from "./review-form.module.css";
 
-export const ReviewForm = (onSave) => {
+export const ReviewForm = ({onSave}) => {
     const {form, setText, setIncrementRating, setDecrementRating, clearForm} = useForm();
     const { text, rating} = form;
     const { auth, userLogin } = useAuth();
